@@ -1,6 +1,7 @@
 //Функция, возвращающая случайное целое число из переданного диапазона включительно.
 //source https://learn.javascript.ru/task/random-int-min-max
-function getRandomInt(min, max) {
+
+const getRandomInt = function(min, max) {
   // получить случайное число от (min-0.5) до (max+0.5)
   let rand = min - 0.5 + Math.random() * (max - min + 1);
   if (min<max && min>0) {
@@ -12,10 +13,12 @@ function getRandomInt(min, max) {
     }
 
 }
+alert( randomInt(1, 8) );
 //Функция, возвращающая случайное число с плавающей точкой из переданного диапазона включительно.
 //source https://myrusakov.ru/js-random-numbers.html
 
-function getRandomFloat(min, max) {
+
+const getRandomFloat = function (min, max) {
   // получить случайное число от (min-0.5) до (max+0.5)
   if (min<max && min>0) {
     return Math.random() * (max - min) + min;
@@ -26,7 +29,7 @@ function getRandomFloat(min, max) {
     }
 
 }
-
+alert( randomFloat(1, 3.008) );
 
 
 
