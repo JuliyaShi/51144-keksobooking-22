@@ -13,7 +13,7 @@ const getRandomInt = function(min, max) {
   }
 
 }
-alert( getRandomInt(1, 8) );
+//alert( getRandomInt(1, 8) );
 //Функция, возвращающая случайное число с плавающей точкой из переданного диапазона включительно.
 //source https://myrusakov.ru/js-random-numbers.html
 
@@ -29,21 +29,37 @@ const getRandomFloat = function (min, max) {
   }
 
 }
-alert( getRandomFloat(1, 3.008) );
+//alert( getRandomFloat(1, 3.008) );
 
 const TYPE = ['palace', 'flat' , 'house' , 'bungalow'];
 const CHECKIN = ['12:00', '13:00', '14:00'];
 const CHECKOUT = ['12:00', '13:00', '14:00'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+const PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+
 
 //Функция, возвращающая случайный элемент в переданном массиве.
 const getRandomArrayElement = (elements) => {
   return elements[_.random(0, elemets.length - 1)];
   };
 
+/* const createArr = (FEATURES, (FEATURES.length)) => Array.from(
+  { length: Math.min(FEATURES.length, 1 + Math.random() * (FEATURES.length) | 0) },
+     () => FEATURES.splice(Math.random() * FEATURES.length | 0, 1)[0]
+  );
+
+*/
+//Функция, возвращающая массив случайной длины из значений
+const createArr = ([...source], maxLength) => Array.from(
+  { length: Math.min(source.length, 1 + Math.random() * maxLength | 0) },
+  () => source.splice(Math.random() * source.length | 0, 1)[0]
+);
+
 const author= {
 avatar: img/avatars/user{{'0'+ getRandomInt(1, 8)}}.png;
 };
+
+
 
 const offer= {
 title: 'avaible',
@@ -54,15 +70,15 @@ rooms: Math(abs),
 guests: Math(abs),
 checkin: getRandomArrayElement(CHECKIN),
 checkout: getRandomArrayElement(CHECKOUT),
-features: getRandomArrayElement(FEATURES),
+features: createArr(FEATURES,FEATURES.length),
 description: 'avaible',
-photos: [http://o0.github.io/assets/images/tokyo/hotel1.jpg, http://o0.github.io/assets/images/tokyo/hotel2.jpg, http://o0.github.io/assets/images/tokyo/hotel3.jpg]
+photos:createArr(PHOTOS,FPHOTOS.length)
 }
 
 
 const location = {
-{x: getRandomFloat(35.65000, 35.70000)},
-{y: getRandomFloat(139.70000, 139.80000)}
+x: getRandomFloat(35.65000, 35.70000),
+y: getRandomFloat(139.70000, 139.80000)
 }
 
 
@@ -72,9 +88,26 @@ const countOfArrays= 10;
 //creating an random object
 const createObj = () => {
 return {
-author: ,
-offer: ,
-location:
+
+author: author.avatar ,
+
+offer: {
+
+title: 'avaible',
+address: {{location.x}}, {{location.y}},
+price: getRandomFloat(1,100),
+type: getRandomArrayElement(TYPE),
+rooms: getRandomInt(1,100),
+guests: getRandomInt(1,100),
+checkin: getRandomArrayElement(CHECKIN),
+checkout: getRandomArrayElement(CHECKOUT),
+features: createArr(FEATURES,FEATURES.length),
+description: 'avaible',
+photos:createArr(PHOTOS,FPHOTOS.length)
+},
+
+location:  {x: getRandomFloat(35.65000, 35.70000)},
+{y: getRandomFloat(139.70000, 139.80000)}
 
 };
 
