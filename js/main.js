@@ -1,5 +1,5 @@
-//Функция, возвращающая случайное целое число из переданного диапазона включительно.
-//source https://learn.javascript.ru/task/random-int-min-max
+
+//Функция, возвращающая случайное целое число из переданного диапазона включительно. source https://learn.javascript.ru/task/random-int-min-max
 
 const getRandomInt = function(min, max) {
   // получить случайное число от (min-0.5) до (max+0.5)
@@ -55,19 +55,19 @@ const createArr = ([...source], maxLength) => Array.from(
   () => source.splice(Math.random() * source.length | 0, 1)[0]
 );
 
-const author= {
-avatar: img/avatars/user{{'0'+ getRandomInt(1, 8)}}.png;
-};
+const author = {
+avatar: 'img/avatars/user{String({getRandomInt(1,8)}).padStart(2,0)}.png'
+}
 
 
 
 const offer= {
 title: 'avaible',
-address: {{location.x}}, {{location.y}},
-price: Math(abs),
+address: '{{location.x}}, {{location.y}}',
+price: getRandomFloat(1, 6),
 type: getRandomArrayElement(TYPE),
-rooms: Math(abs),
-guests: Math(abs),
+rooms: getRandomInt(1, 6),
+guests: getRandomInt(1, 6),
 checkin: getRandomArrayElement(CHECKIN),
 checkout: getRandomArrayElement(CHECKOUT),
 features: createArr(FEATURES,FEATURES.length),
@@ -94,7 +94,7 @@ author: author.avatar ,
 offer: {
 
 title: 'avaible',
-address: {{location.x}}, {{location.y}},
+address: '{{location.x}}, {{location.y}}',
 price: getRandomFloat(1,100),
 type: getRandomArrayElement(TYPE),
 rooms: getRandomInt(1,100),
@@ -106,11 +106,13 @@ description: 'avaible',
 photos:createArr(PHOTOS,FPHOTOS.length)
 },
 
-location:  {x: getRandomFloat(35.65000, 35.70000)},
-{y: getRandomFloat(139.70000, 139.80000)}
+location:  {
+  x: getRandomFloat(35.65000, 35.70000),
+  y: getRandomFloat(139.70000, 139.80000)
 
-};
+}
 
+}
 }
 
 const tenArrays = new Array(countOfArrays).fill(null).map(() => createObj());//creating array of 10 objs
