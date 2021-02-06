@@ -48,12 +48,12 @@ const createArr = ([...source], maxLength) => Array.from(
   () => source.splice(Math.random() * source.length | 0, 1)[0]);
 
 const author = {
-  avatar: 'img/avatars/user{String({getRandomInt(1,8)}).padStart(2,0)}.png'
+  avatar: 'img/avatars/user{String({getRandomInt(1,8)}).padStart(2,0)}.png',
 }
 
 
 
-const offer= {
+const offer = {
   title: 'avaible',
   address: '{{location.x}}, {{location.y}}',
   price: getRandomFloat(1, 6),
@@ -72,7 +72,7 @@ const location = {
   x: getRandomFloat(35.65000, 35.70000),
   y: getRandomFloat(139.70000, 139.80000),
 
-
+}
 const countOfArrays = 10;
 
 
@@ -94,16 +94,18 @@ const createObj = () => {
       checkout: getRandomArrayElement(CHECKOUT),
       features: createArr(FEATURES,FEATURES.length),
       description: 'avaible',
-      photos:createArr(PHOTOS,PHOTOS.length)
+      photos:createArr(PHOTOS,PHOTOS.length),
     },
 
     location:  {
       x: getRandomFloat(35.65000, 35.70000),
-      y: getRandomFloat(139.70000, 139.80000)
+      y: getRandomFloat(139.70000, 139.80000),
 
-    }
+    },
 
   }
 }
 
 const tenArrays = new Array(countOfArrays).fill(null).map(() => createObj()) //creating array of 10 objs
+
+alert(tenArrays);
