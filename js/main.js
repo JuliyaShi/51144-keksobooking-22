@@ -37,82 +37,73 @@ const CHECKOUT = ['12:00', '13:00', '14:00'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
-
 //Функция, возвращающая случайный элемент в переданном массиве.
 const getRandomArrayElement = (elements) => {
-  return elements[_.random(0, elemets.length - 1)];
-  };
+  return elements[getRandomInt(0, elemets.length - 1)];
+};
 
-/* const createArr = (FEATURES, (FEATURES.length)) => Array.from(
-  { length: Math.min(FEATURES.length, 1 + Math.random() * (FEATURES.length) | 0) },
-     () => FEATURES.splice(Math.random() * FEATURES.length | 0, 1)[0]
-  );
-
-*/
 //Функция, возвращающая массив случайной длины из значений
 const createArr = ([...source], maxLength) => Array.from(
   { length: Math.min(source.length, 1 + Math.random() * maxLength | 0) },
-  () => source.splice(Math.random() * source.length | 0, 1)[0]
-);
+  () => source.splice(Math.random() * source.length | 0, 1)[0]);
 
 const author = {
-avatar: 'img/avatars/user{String({getRandomInt(1,8)}).padStart(2,0)}.png'
+  avatar: 'img/avatars/user{String({getRandomInt(1,8)}).padStart(2,0)}.png'
 }
 
 
 
 const offer= {
-title: 'avaible',
-address: '{{location.x}}, {{location.y}}',
-price: getRandomFloat(1, 6),
-type: getRandomArrayElement(TYPE),
-rooms: getRandomInt(1, 6),
-guests: getRandomInt(1, 6),
-checkin: getRandomArrayElement(CHECKIN),
-checkout: getRandomArrayElement(CHECKOUT),
-features: createArr(FEATURES,FEATURES.length),
-description: 'avaible',
-photos:createArr(PHOTOS,FPHOTOS.length)
+  title: 'avaible',
+  address: '{{location.x}}, {{location.y}}',
+  price: getRandomFloat(1, 6),
+  type: getRandomArrayElement(TYPE),
+  rooms: getRandomInt(1, 6),
+  guests: getRandomInt(1, 6),
+  checkin: getRandomArrayElement(CHECKIN),
+  checkout: getRandomArrayElement(CHECKOUT),
+  features: createArr(FEATURES,FEATURES.length),
+  description: 'avaible',
+  photos:createArr(PHOTOS,PHOTOS.length),
 }
 
 
 const location = {
-x: getRandomFloat(35.65000, 35.70000),
-y: getRandomFloat(139.70000, 139.80000)
-}
+  x: getRandomFloat(35.65000, 35.70000),
+  y: getRandomFloat(139.70000, 139.80000),
 
 
-const countOfArrays= 10;
+const countOfArrays = 10;
 
 
 //creating an random object
 const createObj = () => {
-return {
+  return {
 
-author: author.avatar ,
+    author: author.avatar ,
 
-offer: {
+    offer: {
 
-title: 'avaible',
-address: '{{location.x}}, {{location.y}}',
-price: getRandomFloat(1,100),
-type: getRandomArrayElement(TYPE),
-rooms: getRandomInt(1,100),
-guests: getRandomInt(1,100),
-checkin: getRandomArrayElement(CHECKIN),
-checkout: getRandomArrayElement(CHECKOUT),
-features: createArr(FEATURES,FEATURES.length),
-description: 'avaible',
-photos:createArr(PHOTOS,FPHOTOS.length)
-},
+      title: 'avaible',
+      address: '{{location.x}}, {{location.y}}',
+      price: getRandomFloat(1,100),
+      type: getRandomArrayElement(TYPE),
+      rooms: getRandomInt(1,100),
+      guests: getRandomInt(1,100),
+      checkin: getRandomArrayElement(CHECKIN),
+      checkout: getRandomArrayElement(CHECKOUT),
+      features: createArr(FEATURES,FEATURES.length),
+      description: 'avaible',
+      photos:createArr(PHOTOS,PHOTOS.length)
+    },
 
-location:  {
-  x: getRandomFloat(35.65000, 35.70000),
-  y: getRandomFloat(139.70000, 139.80000)
+    location:  {
+      x: getRandomFloat(35.65000, 35.70000),
+      y: getRandomFloat(139.70000, 139.80000)
 
+    }
+
+  }
 }
 
-}
-}
-
-const tenArrays = new Array(countOfArrays).fill(null).map(() => createObj());//creating array of 10 objs
+const tenArrays = new Array(countOfArrays).fill(null).map(() => createObj()) //creating array of 10 objs
