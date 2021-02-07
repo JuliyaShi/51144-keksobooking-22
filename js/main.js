@@ -1,5 +1,5 @@
-//Функция, возвращающая случайное целое число из переданного диапазона включительно.
-//source https://learn.javascript.ru/task/random-int-min-max
+
+//Функция, возвращающая случайное целое число из переданного диапазона включительно. source https://learn.javascript.ru/task/random-int-min-max
 
 const getRandomInt = function(min, max) {
   // получить случайное число от (min-0.5) до (max+0.5)
@@ -7,13 +7,13 @@ const getRandomInt = function(min, max) {
   if (min<max && min>0) {
     return Math.round(rand);
   } else if (min<0) {
-    return 'The min should greater be lower than zero';
+    return 'The min should greater be than zero';
   } else {
     return 'The min should be lower than max';
   }
 
 }
-alert( getRandomInt(1, 8) );
+//alert( getRandomInt(1, 8) );
 //Функция, возвращающая случайное число с плавающей точкой из переданного диапазона включительно.
 //source https://myrusakov.ru/js-random-numbers.html
 
@@ -23,13 +23,92 @@ const getRandomFloat = function (min, max) {
   if (min<max && min>0) {
     return Math.random() * (max - min) + min;
   } else if (min<0) {
-    return 'The min should greater be lower than zero';
+    return 'The min should be greater  than zero';
   } else {
     return 'The min should be lower than max';
   }
 
 }
-alert( getRandomFloat(1, 3.008) );
+//alert( getRandomFloat(1, 3.008) );
+
+const TYPE = ['palace', 'flat' , 'house' , 'bungalow'];
+const CHECKIN = ['12:00', '13:00', '14:00'];
+const CHECKOUT = ['12:00', '13:00', '14:00'];
+const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+const PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+
+//Функция, возвращающая случайный элемент в переданном массиве.
+const getRandomArrayElement = (elements) => {
+  return elements[getRandomInt(0, elements.length - 1)];
+};
+
+//Функция, возвращающая массив случайной длины из значений
+const createArr = ([...source], maxLength) => Array.from(
+  { length: Math.min(source.length, 1 + Math.random() * maxLength | 0) },
+  () => source.splice(Math.random() * source.length | 0, 1)[0]);
+
+//объект — описывает автора
+const author = {
+  avatar: 'img/avatars/user{String({getRandomInt(1,8)}).padStart(2,0)}.png',
+}
 
 
+//объект — содержит информацию об объявлении
+const offer = {
+  title: 'avaible',
+  address: '{{location.x}}, {{location.y}}',
+  price: getRandomFloat(1, 6),
+  type: getRandomArrayElement(TYPE),
+  rooms: getRandomInt(1, 6),
+  guests: getRandomInt(1, 6),
+  checkin: getRandomArrayElement(CHECKIN),
+  checkout: getRandomArrayElement(CHECKOUT),
+  features: createArr(FEATURES,FEATURES.length),
+  description: 'avaible',
+  photos:createArr(PHOTOS,PHOTOS.length),
+}
 
+//объект — местоположение в виде географических координат
+const location = {
+  x: getRandomFloat(35.65000, 35.70000),
+  y: getRandomFloat(139.70000, 139.80000),
+
+}
+const countOfArrays = 10;
+
+
+//creating an random object
+const createObj = () => {
+  return {
+
+    author: author.avatar ,
+
+    offer: {
+
+      title: 'avaible',
+      address: '{{location.x}}, {{location.y}}',
+      price: getRandomFloat(1,100),
+      type: getRandomArrayElement(TYPE),
+      rooms: getRandomInt(1,100),
+      guests: getRandomInt(1,100),
+      checkin: getRandomArrayElement(CHECKIN),
+      checkout: getRandomArrayElement(CHECKOUT),
+      features: createArr(FEATURES,FEATURES.length),
+      description: 'avaible',
+      photos:createArr(PHOTOS,PHOTOS.length),
+    },
+
+    location:  {
+      x: getRandomFloat(35.65000, 35.70000),
+      y: getRandomFloat(139.70000, 139.80000),
+
+    },
+
+  };
+}
+
+const tenArrays = new Array(countOfArrays).fill(null).map(() => createObj()) //creating array of 10 objs
+
+alert(tenArrays);
+alert(offer);
+alert(location);
