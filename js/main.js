@@ -47,12 +47,13 @@ const createArr = ([...source], maxLength) => Array.from(
   { length: Math.min(source.length, 1 + Math.random() * maxLength | 0) },
   () => source.splice(Math.random() * source.length | 0, 1)[0]);
 
+//объект — описывает автора
 const author = {
   avatar: 'img/avatars/user{String({getRandomInt(1,8)}).padStart(2,0)}.png',
 }
 
 
-
+//объект — содержит информацию об объявлении
 const offer = {
   title: 'avaible',
   address: '{{location.x}}, {{location.y}}',
@@ -67,7 +68,7 @@ const offer = {
   photos:createArr(PHOTOS,PHOTOS.length),
 }
 
-
+//объект — местоположение в виде географических координат
 const location = {
   x: getRandomFloat(35.65000, 35.70000),
   y: getRandomFloat(139.70000, 139.80000),
