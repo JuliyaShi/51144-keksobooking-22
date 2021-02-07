@@ -39,7 +39,7 @@ const PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0
 
 //Функция, возвращающая случайный элемент в переданном массиве.
 const getRandomArrayElement = (elements) => {
-  return elements[getRandomInt(0, elemets.length - 1)];
+  return elements[getRandomInt(0, elements.length - 1)];
 };
 
 //Функция, возвращающая массив случайной длины из значений
@@ -103,7 +103,7 @@ const createObj = () => {
 
     },
 
-  }
+  };
 }
 
 const tenArrays = new Array(countOfArrays).fill(null).map(() => createObj()) //creating array of 10 objs
