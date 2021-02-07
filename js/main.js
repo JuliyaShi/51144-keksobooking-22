@@ -110,3 +110,5 @@ const createObj = () => {
 const tenArrays = new Array(countOfArrays).fill(null).map(() => createObj()) //creating array of 10 objs
 
 alert(tenArrays);
+alert(offer);
+alert(location);
