@@ -14,6 +14,7 @@ const getRandomInt = function(min, max) {
 
 }
 //alert( getRandomInt(1, 8) );
+
 //Функция, возвращающая случайное число с плавающей точкой из переданного диапазона включительно.
 //source https://myrusakov.ru/js-random-numbers.html
 
@@ -49,7 +50,7 @@ const createArr = ([...source], maxLength) => Array.from(
 
 //объект — описывает автора
 const author = {
-  avatar: 'img/avatars/user{String({getRandomInt(1,8)}).padStart(2,0)}.png',
+  avatar: `img/avatars/user${String(getRandomInt(1,8)).padStart(2,0)}.png`,
 }
 
 
