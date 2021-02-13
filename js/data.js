@@ -75,4 +75,4 @@ alert(location);
 
 
 
-export {TYPE,CHECKIN,CHECKOUT,FEATURES,PHOTOS,countOfArrays,createObj};
+export {TYPE,CHECKIN,CHECKOUT,FEATURES,PHOTOS,countOfArrays,author,offer,location,createObj};
