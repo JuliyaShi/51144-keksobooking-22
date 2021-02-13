@@ -1,11 +1,11 @@
 import './utils.js';
 import './data.js';
 import {author,offer,createObj} from './data.js';
+
+
+
 //шаблон #card
-
-
-
-const cardTemplate = document.querySelector('template').content.querySelector('article.popup');
+const cardTemplate = document.querySelector('#card').content.querySelector('article.popup');
 
 const card = cardTemplate.cloneNode(true);
 const cardElement = card.cloneNode(true);
@@ -55,6 +55,7 @@ const testCardFragment = document.createDocumentFragment();
 
 
 cardElement.appendChild(testCardFragment);
+
 //отрисовка testCardTemplate в map-canvas
 const canvas = document.querySelector('.map-canvas');
 canvas.appendChild(testCardTemplate);
