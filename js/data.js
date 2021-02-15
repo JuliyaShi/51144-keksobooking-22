@@ -67,12 +67,12 @@ const createObj = () => {
   };
 }
 
-const tenArrays = new Array(countOfArrays).fill(null).map(() => createObj()) //creating array of 10 objs
+const createObjs = new Array(countOfArrays).fill(null).map(() => createObj()) //creating array of 10 objs
 
-alert(tenArrays);
+alert(createObjs);
 alert(offer);
 alert(location);
 
 
 
-export {TYPE,CHECKIN,CHECKOUT,FEATURES,PHOTOS,countOfArrays,author,offer,location,createObj};
+export {TYPE,CHECKIN,CHECKOUT,FEATURES,PHOTOS,countOfArrays,author,offer,location,createObjs};

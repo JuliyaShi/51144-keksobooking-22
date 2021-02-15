@@ -43,4 +43,20 @@ const createArr = ([...source], maxLength) => Array.from(
   { length: Math.min(source.length, 1 + Math.random() * maxLength | 0) },
   () => source.splice(Math.random() * source.length | 0, 1)[0]);
 
-export {getRandomInt,getRandomFloat,getRandomArrayElement,createArr};
+//Функция проверки типа жилья
+const getApartmentType = function (element){
+  if (element.offer.type==='flat'){
+    return 'Квартира';
+
+  } else if (element.offer.type==='bungalow'){
+    return 'Бунгало';
+
+  }else if (element.offer.type==='house'){
+    return 'Дом';
+
+  }else if (element.offer.type==='palace'){
+    return 'Дворец';
+
+  }
+};
+export {getRandomInt,getRandomFloat,getRandomArrayElement,createArr,getApartmentType};
