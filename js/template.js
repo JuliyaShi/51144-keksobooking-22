@@ -1,60 +1,48 @@
-import './utils.js';
+import {getApartmentType} from'./utils.js';
 import './data.js';
-import {author,offer,createObj} from './data.js';
+import {author,offer,createObjs} from './data.js';
+
+
+
 //шаблон #card
+const cardTemplate = document.querySelector('#card').content.querySelector('article.popup');
 
 
 
-const cardTemplate = document.querySelector('template').content.querySelector('article.popup');
+//Импортируем модуль для генерации данных, чтобы получить массив
+const testCardTemplate = createObjs();
 
-const card = cardTemplate.cloneNode(true);
-const cardElement = card.cloneNode(true);
-
-
-const cardTitle = card.querySelector('.popup__title');
-const cardAddress = card.querySelector('.popup__text--address');
-const cardPrice = card.querySelector('.popup__text--price');
-const cardType = card.querySelector('.popup__type');
-const cardCapacity = card.querySelector('.popup__text--capacity');
-const cardTime = card.querySelector('.popup__text--time');
-const cardFeatures = card.querySelector('.popup__features');
-const cardDescription = card.querySelector('.popup__description');
-const cardPhotos = card.querySelector('.popup__photos');
-const userAvatar = card.querySelector('.popup__avatar');
-
-
-cardTitle.textContent = offer.title;
-cardAddress.textContent = offer.address;
-cardPrice.textContent = `${offer.price} ₽/ночь`;
-cardType.textContent = offer.type;
-
-if (offer.type==='flat'){
-  cardTitle.textContent='Квартира';
-
-} else if (offer.type==='bungalow'){
-  cardTitle.textContent='Бунгало';
-
-}else if (offer.type==='house'){
-  cardTitle.textContent='Дом';
-
-}else if (offer.type==='palace'){
-  cardTitle.textContent='Дворец';
-
-}
-cardCapacity.textContent = `${offer.rooms}`+' комнаты для ' + `${offer.guests}`;
-cardTime.textContent = 'Заезд после '+ `${offer.checkin}`+',' + ' выезд до ' +`${offer.checkout}`;
-cardFeatures.textContent = offer.features;
-cardDescription.textContent = offer.description;
-cardPhotos.src = offer.photos;
-userAvatar.src = author.avatar;
-
-
-const testCardTemplate = createObj();
-
+//вставлять элементы будем через DocumentFragment
 const testCardFragment = document.createDocumentFragment();
 
 
-cardElement.appendChild(testCardFragment);
+
+
+//Отрисуем всё ещё шаблон, но уже в проходке по массиву с данными
+testCardTemplate.forEach(() => {
+  //клонируем шаблон
+  const card = cardTemplate.cloneNode(true);
+  //вставляем данные в шаблон
+  card.querySelector('.popup__title').textContent = offer.title;
+  card.querySelector('.popup__text--address').textContent = offer.address;
+  card.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
+  card.querySelector('.popup__type').textContent = getApartmentType;
+  card.querySelector('.popup__text--capacity').textContent = `${offer.rooms}`+' комнаты для ' + `${offer.guests}`;
+  card.querySelector('.popup__text--time').textContent = 'Заезд после '+ `${offer.checkin}`+',' + ' выезд до ' +`${offer.checkout}`;
+  card.querySelector('.popup__features').textContent = offer.features;
+  card.querySelector('.popup__description').textContent = offer.description;
+  card.querySelector('.popup__photos').src = offer.photos;
+  card.querySelector('.popup__avatar').src = author.avatar;
+
+  testCardFragment.appendChild(card);
+});
+
+
 //отрисовка testCardTemplate в map-canvas
 const canvas = document.querySelector('.map-canvas');
-canvas.appendChild(testCardTemplate);
+
+const template = (elementsNumber) => {
+  canvas.appendChild(testCardFragment.children[elementsNumber]);
+};
+template(0);
+export {template};
