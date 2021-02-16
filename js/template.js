@@ -12,9 +12,8 @@ const cardTemplate = document.querySelector('#card').content.querySelector('arti
 //Импортируем модуль для генерации данных, чтобы получить массив
 const testCardTemplate = createObjs();
 
-//вставлять элементы будем через DocumentFragment
+//Вставлять элементы будем через DocumentFragment
 const testCardFragment = document.createDocumentFragment();
-
 
 
 
