@@ -21,19 +21,48 @@ const changePrice = () => {
 };
 
 //Поля «Время заезда» и «Время выезда» синхронизированы
-const changeTime = (firstTime, secondTime) => {
-  firstTime.value = secondTime.value;
+const changeTimeIn = () => {
+  timeIn.value = timeOut.value;
+};
+
+const changeTimeOut = () => {
+  timeIn.value = timeOut.value;
 };
 
 type.addEventListener('input', changePrice);
 
-timeIn.addEventListener('input',() => {
-  changeTime(timeIn,timeOut);
+timeIn.addEventListener('input',changeTimeIn);
+timeOut.addEventListener('input',changeTimeOut);
 
-});
+const mapFilters = document.querySelector('.map__filters');
+const mapFiltersFilds = mapFilters.querySelectorAll('label, input, select');
+const formFilds = form.querySelectorAll('label, input, select, textarea, button');
 
-timeOut.addEventListener('input',() => {
-  changeTime(timeIn,timeOut);
+const disabledFild = (formas,filds) => {
+  formas.classList.add('ad-form--disabled');
+  filds.forEach((field) => {
+    field.disabled = true;
+  })
+};
 
-});
 
+const enabledFild = (formas,filds) => {
+  formas.classList.remove('ad-form--disabled');
+  filds.forEach((field) => {
+    field.disabled = false;
+  })
+};
+
+const disactiveStatePage = () => {
+  disabledFild(form, formFilds);
+  disabledFild(mapFilters, mapFiltersFilds);
+};
+
+export const activeStatePage = () => {
+  enabledFild(form, formFilds);
+  enabledFild(mapFilters, mapFiltersFilds);
+};
+
+disactiveStatePage();
+
+export const formAddress = form.querySelector('#address');
