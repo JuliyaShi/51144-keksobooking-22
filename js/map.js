@@ -1,8 +1,7 @@
-
-import {activeStatePage, formAddress} from './form.js';
+import {activeStatePage, formAddress} from './forminput.js';
 import {createObjs} from './data.js';
 import {template} from './template.js';
-//инициализируем карту
+
 const LATITUDE_TOKYO = 35.652832;
 const LONGITUDE_TOKYO = 139.839478;
 const MAP_SCALE = 10;
@@ -19,6 +18,7 @@ const DefaultPoints = {
   Y: LONGITUDE_TOKYO.toFixed(DIGITS_AFTER_POINT),
 };
 
+//инициализируем карту
 /* global L:readonly */
 const map = L.map('map-canvas')
   .on('load', () => {
