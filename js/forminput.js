@@ -158,4 +158,30 @@ export const activeStatePage = () => {
 
 disactiveStatePage();
 
+const setUserFormSubmit = (onSuccess) =>{
+  form.addEventListener('submit',(evt) => {
+
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target);
+    fetch(
+      'https://22.javascript.pages.academy/keksobooking',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    )
+      .then((response) => {
+        if (response.ok) {
+          onSuccess();
+        } else {
+          alert('Не удалось отправить форму. Попробуйте ещё раз');
+        }
+      })
+      .catch(() => {
+        alert('Не удалось отправить форму. Попробуйте ещё раз');
+      });
+  });
+};
 export const formAddress = form.querySelector('#address');
+export {setUserFormSubmit};
