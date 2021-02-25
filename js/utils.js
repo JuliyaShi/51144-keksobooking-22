@@ -1,4 +1,3 @@
-
 //Функция, возвращающая случайное целое число из переданного диапазона включительно. source https://learn.javascript.ru/task/random-int-min-max
 
 const getRandomInt = function(min, max) {
@@ -38,6 +37,38 @@ const getRandomArrayElement = (elements) => {
   return elements[getRandomInt(0, elements.length - 1)];
 };
 
+const ALERT_SHOW_TIME = 5000;
+// adding alert message
+
+const isEscEvent = (evt) => {
+  return evt.key === 'Escape' || evt.key === 'Esc';
+};
+
+const isEnterEvent = (evt) => {
+  return evt.key === 'Enter';
+};
+
+const showAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = 100;
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = 0;
+  alertContainer.style.top = 0;
+  alertContainer.style.right = 0;
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'red';
+
+  alertContainer.textContent = message;
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+}
+
 //Функция, возвращающая массив случайной длины из значений
 const createArr = ([...source], maxLength) => Array.from(
   { length: Math.min(source.length, 1 + Math.random() * maxLength | 0) },
@@ -59,4 +90,4 @@ const getApartmentType = function (element){
 
   }
 };
-export {getRandomInt,getRandomFloat,getRandomArrayElement,createArr,getApartmentType};
+export {getRandomInt,getRandomFloat,getRandomArrayElement,createArr,getApartmentType, isEscEvent, isEnterEvent, showAlert};
