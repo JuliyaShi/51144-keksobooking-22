@@ -1,6 +1,9 @@
 import {activeStatePage, formAddress} from './forminput.js';
 import {createObjs} from './data.js';
-import {template} from './template.js';
+import {testCardTemplate} from './template.js';
+import { showAlert, debounce } from './util.js';
+import { getData } from './api.js';
+import { setFilterChange} from './filter.js';
 
 const LATITUDE_TOKYO = 35.652832;
 const LONGITUDE_TOKYO = 139.839478;
@@ -12,11 +15,13 @@ const PIN_ICON_SIZE = [40, 40];
 const PIN_ICON_ANCHOR = [20, 40];
 const PIN_ICON_IMAGE = '../img/pin.svg';
 const DIGITS_AFTER_POINT = 5;
+const RENDER_DELAY = 500;
 
 const DefaultPoints = {
   X: LATITUDE_TOKYO.toFixed(DIGITS_AFTER_POINT),
   Y: LONGITUDE_TOKYO.toFixed(DIGITS_AFTER_POINT),
 };
+
 
 //инициализируем карту
 /* global L:readonly */
@@ -65,7 +70,8 @@ mainPinMarker.on('moveend', (evt) => {
 
 mainPinMarker.remove();
 
-createObjs.forEach((point) => {
+
+const renderMarkers = createObjs.forEach((point) => {
   const {location} = point;
 
   const icon = L.icon({
@@ -87,9 +93,19 @@ createObjs.forEach((point) => {
   marker
     .addTo(map)
     .bindPopup(
-      template(point),
+      testCardTemplate(point),
       {
         keepInView: true,
       },
     );
 });
+
+getData((ads) => {
+  const adverts = createObjs(ads);
+  renderMarkers(adverts);
+  setFilterChange(() => renderMarkers(adverts));
+  setFilterChange(debounce(
+    () => renderMarkers(adverts),
+    RENDER_DELAY,
+  ));
+}, showAlert);
