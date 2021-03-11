@@ -37,7 +37,8 @@ const DefaultCoord = {
   lat: COORD_TOKYO.lat.toFixed(FRACTION_DIGITS_AT_COORDS),
   lng: COORD_TOKYO.lng.toFixed(FRACTION_DIGITS_AT_COORDS),
 };
-/* global L */
+
+let L = window.L;
 let map;
 let marker;
 let mainPinMarker;
