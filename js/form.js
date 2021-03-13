@@ -1,5 +1,5 @@
 import {validationInputCapacity} from './validation.js';
-import {imagesDownload, previewImages} from './upload-photo.js';
+
 
 export const formOffer = document.querySelector('.ad-form');
 const typeOffer = formOffer.querySelector('#type');
@@ -61,7 +61,7 @@ const inactiveStatePage = () => {
 export const activeStatePage = () => {
   enabledField(formOffer, formFields);
   enabledField(mapFilters, mapFiltersFields);
-  imagesDownload.addEventListener('change', previewImages);
+
 };
 
 roomsNumber.addEventListener('input', () => {
