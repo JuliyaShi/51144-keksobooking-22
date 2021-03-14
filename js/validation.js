@@ -13,4 +13,3 @@ export const validationInputCapacity = (firstElement, secondElement) => {
 
   secondElement.reportValidity();
 };
-

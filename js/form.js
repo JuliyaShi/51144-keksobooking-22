@@ -1,5 +1,8 @@
 import {validationInputCapacity} from './validation.js';
-
+import {modalErrorTemplate, modalSuccessTemplate, showModal} from './modal.js';
+import {DefaultCoords, removeMainMarker, renderMainPinMarker, renderPoints} from './map.js';
+import {filterForm} from './filter.js';
+import {sendData} from './data.js';
 
 export const formOffer = document.querySelector('.ad-form');
 const typeOffer = formOffer.querySelector('#type');
@@ -7,9 +10,12 @@ const priceOffer = formOffer.querySelector('#price');
 const timeInOffer = formOffer.querySelector('#timein');
 const timeOutOffer = formOffer.querySelector('#timeout');
 export const formAddress = formOffer.querySelector('#address');
-export const roomsNumber = formOffer.querySelector('#room_number');
-export const roomsCapacity = formOffer.querySelector('#capacity');
+const roomsNumber = formOffer.querySelector('#room_number');
+const roomsCapacity = formOffer.querySelector('#capacity');
 export const resetButton = document.querySelector('.ad-form__reset');
+const mapFilters = document.querySelector('.map__filters');
+const mapFiltersFields = mapFilters.querySelectorAll('label, input, select');
+const formFields = formOffer.querySelectorAll('label, input, select, textarea, button');
 
 const minPrice = {
   bungalow: 0,
@@ -31,52 +37,90 @@ const changeTimeInOffer = () => {
   timeInOffer.value = timeOutOffer.value;
 };
 
-typeOffer.addEventListener('input', changePriceOffer);
-timeInOffer.addEventListener('input', changeTimeOutOffer);
-timeOutOffer.addEventListener('input', changeTimeInOffer);
-
-const mapFilters = document.querySelector('.map__filters');
-const mapFiltersFields = mapFilters.querySelectorAll('label, input, select');
-const formFields = formOffer.querySelectorAll('label, input, select, textarea, button');
-
-const disabledField = (form, fields) => {
+const setDisabledField = (form, fields) => {
   form.classList.add('ad-form--disabled');
   fields.forEach((field) => {
     field.disabled = true;
   })
 };
 
-const enabledField = (form, fields) => {
+const setEnabledField = (form, fields) => {
   form.classList.remove('ad-form--disabled');
   fields.forEach((field) => {
     field.disabled = false;
   })
 };
 
-const inactiveStatePage = () => {
-  disabledField(formOffer, formFields);
-  disabledField(mapFilters, mapFiltersFields);
+export const setInsetActiveStatePage = () => {
+  setDisabledField(formOffer, formFields);
+  setDisabledField(mapFilters, mapFiltersFields);
 };
 
-export const activeStatePage = () => {
-  enabledField(formOffer, formFields);
-  enabledField(mapFilters, mapFiltersFields);
+export const setActiveStatePage = () => {
+  setEnabledField(formOffer, formFields);
+  setEnabledField(mapFilters, mapFiltersFields);
 
 };
 
-roomsNumber.addEventListener('input', () => {
-  validationInputCapacity(roomsNumber, roomsCapacity);
-});
+const onSuccess = (data) => {
+  showModal(modalSuccessTemplate);
+  defaultFormState();
+  defaultFilterFormState(data);
+};
 
-roomsCapacity.addEventListener('input', () => {
-  validationInputCapacity(roomsNumber, roomsCapacity);
-});
+const defaultMarkerState = () => {
+  formAddress.value = `${DefaultCoords.lat}, ${DefaultCoords.lng}`;
+  removeMainMarker();
+  renderMainPinMarker();
+};
 
-formOffer.addEventListener('change', () => {
-  changePriceOffer();
-  changeTimeOutOffer();
-  changeTimeInOffer();
-  validationInputCapacity(roomsNumber, roomsCapacity);
-});
+const defaultFormState = () => {
+  formOffer.reset();
+  defaultMarkerState();
+};
 
-inactiveStatePage();
+const defaultFilterFormState = (data) => {
+  filterForm.reset();
+  renderPoints(data);
+};
+
+export const addFormInputsListeners = () => {
+  roomsNumber.addEventListener('input', () => {
+    validationInputCapacity(roomsNumber, roomsCapacity);
+  });
+
+  roomsCapacity.addEventListener('input', () => {
+    validationInputCapacity(roomsNumber, roomsCapacity);
+  });
+
+  formOffer.addEventListener('change', () => {
+    changePriceOffer();
+    changeTimeOutOffer();
+    changeTimeInOffer();
+    validationInputCapacity(roomsNumber, roomsCapacity);
+  });
+
+  typeOffer.addEventListener('input', changePriceOffer);
+  timeInOffer.addEventListener('input', changeTimeOutOffer);
+  timeOutOffer.addEventListener('input', changeTimeInOffer);
+};
+
+export const addResetButtonListener = (data) => {
+  resetButton.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    defaultFormState();
+    defaultFilterFormState(data);
+  })
+};
+
+export const setUserFormSubmit = (data) => {
+  formOffer.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      () => onSuccess(data),
+      () => showModal(modalErrorTemplate),
+      new FormData(evt.target),
+    );
+  })
+};

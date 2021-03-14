@@ -1,3 +1,4 @@
+
 import {isEscEvent} from './util.js';
 
 const MESSAGE_SHOW_TIME = 5000;
@@ -8,18 +9,25 @@ export const modalSuccessTemplate = document.querySelector('#success')
 export const modalErrorTemplate = document.querySelector('#error')
   .content.querySelector('.error');
 
+const styleOfMessage = {
+  position: 'fixed',
+  top: '0',
+  left: '0',
+  right: '0',
+  zIndex: '1000',
+  padding: '10px 3px',
+  fontSize: '30px',
+  textAlign: 'center',
+  backgroundColor: 'red',
+  color: 'white',
+};
+
 export const showMessage = (message) => {
   const messageContainer = document.createElement('div');
-  messageContainer.style.position = 'fixed';
-  messageContainer.style.top = '0';
-  messageContainer.style.left = '0';
-  messageContainer.style.right = '0';
-  messageContainer.style.zIndex = '1000';
-  messageContainer.style.padding = '10px 3px';
-  messageContainer.style.fontSize = '30px';
-  messageContainer.style.textAlign = 'center';
-  messageContainer.style.backgroundColor = 'red';
-  messageContainer.style.color = 'white';
+
+  for (let styleMessageName in styleOfMessage) {
+    messageContainer.style[styleMessageName] = styleOfMessage[styleMessageName];
+  }
 
   messageContainer.textContent = message;
 
@@ -27,7 +35,7 @@ export const showMessage = (message) => {
 
   setTimeout(() => {
     messageContainer.remove();
-  }, MESSAGE_SHOW_TIME)
+  }, MESSAGE_SHOW_TIME);
 };
 
 export const showModal = (template) => {

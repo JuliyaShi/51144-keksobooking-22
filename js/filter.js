@@ -1,47 +1,76 @@
-const filterForm = document.querySelector('.map__filters');
+export const filterForm = document.querySelector('.map__filters');
 export const filterHousingType = filterForm.querySelector('#housing-type');
 export const filterHousingRooms = filterForm.querySelector('#housing-rooms');
 export const filterHousingGuests = filterForm.querySelector('#housing-guests');
 export const filterHousingPrice = filterForm.querySelector('#housing-price');
-const filterHousingFeatures = filterForm.querySelector('#housing-features');
-export const filterFeatures = filterHousingFeatures.querySelectorAll('input');
+export const filterHousingFeatures = filterForm.querySelector('#housing-features');
+
+export const FilterType = {
+  TYPE: 'housing-type',
+  PRICE: 'housing-price',
+  ROOMS: 'housing-rooms',
+  GUESTS: 'housing-guests',
+  FEATURES: 'features',
+};
 
 export const filter = {
-  'housing-type': '',
-  'housing-price': '',
-  'housing-rooms': '',
-  'housing-guests': '',
-  'features': [],
+  [FilterType.TYPE]: '',
+  [FilterType.PRICE]: '',
+  [FilterType.ROOMS]: '',
+  [FilterType.GUESTS]: '',
+  [FilterType.FEATURES]: [],
+};
+
+const ValueTypeToFilter = {
+  [FilterType.TYPE]: 'any',
+  [FilterType.PRICE]: 'any',
+  [FilterType.ROOMS]: 'any',
+  [FilterType.GUESTS]: 'any',
+};
+
+const HousingPrice = {
+  LOW: 'low',
+  MIDDLE: 'middle',
+  HIGH: 'high',
+};
+
+const PriceTypeToRange = {
+  [HousingPrice.LOW]: 10000,
+  [HousingPrice.MIDDLE]: 50000,
 };
 
 export const getFilteredList = (list) => {
   return list
     .filter(({offer}) => {
-      return (!filter['housing-type'] || filter['housing-type'] === 'any') ? true
-        : offer.type === filter['housing-type'];
+      return (!filter[FilterType.TYPE] || filter[FilterType.TYPE] === ValueTypeToFilter[FilterType.TYPE]) ? true
+        : offer.type === filter[FilterType.TYPE];
     })
     .filter(({offer}) => {
-      if (!filter['housing-price'] || filter['housing-price'] === 'any') {
+      if (!filter[FilterType.PRICE] || filter[FilterType.PRICE] === ValueTypeToFilter[FilterType.PRICE]) {
         return true;
-      } else if (filter['housing-price'] === 'low' && offer.price < 10000) {
+      } else if (filter[FilterType.PRICE] === HousingPrice.LOW
+        && offer.price < PriceTypeToRange[HousingPrice.LOW]) {
         return true;
-      } else if (filter['housing-price'] === 'middle' && offer.price >= 10000 && offer.price <= 50000) {
+      } else if (filter[FilterType.PRICE] === HousingPrice.MIDDLE
+        && offer.price >= PriceTypeToRange[HousingPrice.LOW]
+        && offer.price <= PriceTypeToRange[HousingPrice.MIDDLE]) {
         return true;
-      } else if (filter['housing-price'] === 'high' && offer.price > 50000) {
+      } else if (filter[FilterType.PRICE] === HousingPrice.HIGH
+        && offer.price > PriceTypeToRange[HousingPrice.MIDDLE]) {
         return true;
       }
       return false;
     })
     .filter(({offer}) => {
-      return (!filter['housing-rooms'] || filter['housing-rooms'] === 'any') ? true
-        : offer.rooms === +filter['housing-rooms'];
+      return (!filter[FilterType.ROOMS] || filter[FilterType.ROOMS] === ValueTypeToFilter[FilterType.ROOMS]) ? true
+        : offer.rooms === +filter[FilterType.ROOMS];
     })
     .filter(({offer}) => {
-      return (!filter['housing-guests'] || filter['housing-guests'] === 'any') ? true
-        : offer.guests === +filter['housing-guests'];
+      return (!filter[FilterType.GUESTS] || filter[FilterType.GUESTS] === ValueTypeToFilter[FilterType.GUESTS]) ? true
+        : offer.guests === +filter[FilterType.GUESTS];
     })
     .filter(({offer}) => {
-      return (!filter['features'] || !filter['features'].length) ? true
-        : filter['features'].every((feature) => offer.features.includes(feature));
+      return (!filter[FilterType.FEATURES] || !filter[FilterType.FEATURES].length) ? true
+        : filter[FilterType.FEATURES].every((feature) => offer.features.includes(feature));
     })
 };
