@@ -2,11 +2,11 @@ import {mapInit} from './map.js';
 import {fetchData} from './data.js';
 import {showMessage} from './modal.js';
 import {addFilterListeners} from './filter-handlers.js';
-import {inactiveStatePage, addFormInputsListeners, addResetButtonListener, setUserFormSubmit} from './form.js';
+import {setInactiveStatePage, addFormInputsListeners, addResetButtonListener, setUserFormSubmit} from './form.js';
 
 const processData = async () => {
   try {
-    inactiveStatePage();
+    setInactiveStatePage();
     mapInit();
     const data = await fetchData();
     setUserFormSubmit(data);

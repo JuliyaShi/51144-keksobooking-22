@@ -1,4 +1,4 @@
-import {validationInputCapacity} from './validation.js';
+import {validateInputCapacit} from './validation.js';
 import {modalErrorTemplate, modalSuccessTemplate, showModal} from './modal.js';
 import {DefaultCoords, removeMainMarker, renderMainPinMarker, renderPoints} from './map.js';
 import {filterForm} from './filter.js';
@@ -51,7 +51,7 @@ const setEnabledField = (form, fields) => {
   })
 };
 
-export const setInsetActiveStatePage = () => {
+export const setInactiveStatePage = () => {
   setDisabledField(formOffer, formFields);
   setDisabledField(mapFilters, mapFiltersFields);
 };
@@ -64,8 +64,8 @@ export const setActiveStatePage = () => {
 
 const onSuccess = (data) => {
   showModal(modalSuccessTemplate);
-  defaultFormState();
-  defaultFilterFormState(data);
+  setDefaultFormState();
+  setDefaultFilterFormState(data);
 };
 
 const defaultMarkerState = () => {
@@ -74,30 +74,30 @@ const defaultMarkerState = () => {
   renderMainPinMarker();
 };
 
-const defaultFormState = () => {
+const setDefaultFormState = () => {
   formOffer.reset();
   defaultMarkerState();
 };
 
-const defaultFilterFormState = (data) => {
+const setDefaultFilterFormState = (data) => {
   filterForm.reset();
   renderPoints(data);
 };
 
 export const addFormInputsListeners = () => {
   roomsNumber.addEventListener('input', () => {
-    validationInputCapacity(roomsNumber, roomsCapacity);
+    validateInputCapacit(roomsNumber, roomsCapacity);
   });
 
   roomsCapacity.addEventListener('input', () => {
-    validationInputCapacity(roomsNumber, roomsCapacity);
+    validateInputCapacit(roomsNumber, roomsCapacity);
   });
 
   formOffer.addEventListener('change', () => {
     onFormOfferChangePrice();
     onFormOfferChangeTimeOut();
     onFormChangeTimeIn();
-    validationInputCapacity(roomsNumber, roomsCapacity);
+    validateInputCapacit(roomsNumber, roomsCapacity);
   });
 
   typeOffer.addEventListener('input', onFormOfferChangePrice);
@@ -108,8 +108,8 @@ export const addFormInputsListeners = () => {
 export const addResetButtonListener = (data) => {
   resetButton.addEventListener('click', (evt) => {
     evt.preventDefault();
-    defaultFormState();
-    defaultFilterFormState(data);
+    setDefaultFormState();
+    setDefaultFilterFormState(data);
   })
 };
 
