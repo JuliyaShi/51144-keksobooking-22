@@ -24,16 +24,16 @@ const minPrice = {
   palace: 10000,
 };
 
-const changePriceOffer = () => {
+const onFormOfferChangePrice = () => {
   priceOffer.min = minPrice[typeOffer.value];
   priceOffer.placeholder = minPrice[typeOffer.value];
 };
 
-const changeTimeOutOffer = () => {
+const onFormOfferChangeTimeOut = () => {
   timeOutOffer.value = timeInOffer.value;
 };
 
-const changeTimeInOffer = () => {
+const onFormChangeTimeIn = () => {
   timeInOffer.value = timeOutOffer.value;
 };
 
@@ -94,15 +94,15 @@ export const addFormInputsListeners = () => {
   });
 
   formOffer.addEventListener('change', () => {
-    changePriceOffer();
-    changeTimeOutOffer();
-    changeTimeInOffer();
+    onFormOfferChangePrice();
+    onFormOfferChangeTimeOut();
+    onFormChangeTimeIn();
     validationInputCapacity(roomsNumber, roomsCapacity);
   });
 
-  typeOffer.addEventListener('input', changePriceOffer);
-  timeInOffer.addEventListener('input', changeTimeOutOffer);
-  timeOutOffer.addEventListener('input', changeTimeInOffer);
+  typeOffer.addEventListener('input', onFormOfferChangePrice);
+  timeInOffer.addEventListener('input', onFormOfferChangeTimeOut);
+  timeOutOffer.addEventListener('input', onFormChangeTimeIn);
 };
 
 export const addResetButtonListener = (data) => {
