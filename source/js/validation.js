@@ -7,7 +7,7 @@ const ErrorMessage = {
 
 let result = '';
 
-export const validateInputCapacity = (firstElement, secondElement) => {
+export const validateInputCapacit = (firstElement, secondElement) => {
   if ((+firstElement.value === 100 && +secondElement.value)
     || (+firstElement.value !== 100 && (!+secondElement.value || +secondElement.value > +firstElement.value))) {
     result = ErrorMessage[+firstElement.value]
